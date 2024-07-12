@@ -38,7 +38,7 @@ public class ChavePixService implements ChaveServicePort {
 
         //verificar se chave pix existe no repositorio, se ja existir lança exception
         if (chavePixServiceRepository.chavepixExistente(clienteChavePix.getChavesPix().getValorChave())) {
-            throw new IllegalStateException("Chave Pix já cadastrada.");
+            throw new ValidationException("Chave Pix já cadastrada.");
         }
 
         //busca informações da conta
