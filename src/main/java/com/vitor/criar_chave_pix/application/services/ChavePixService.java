@@ -6,6 +6,7 @@ import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
 import com.vitor.criar_chave_pix.application.ports.ChaveServicePort;
 import com.vitor.criar_chave_pix.application.ports.ContaServicePort;
 import com.vitor.criar_chave_pix.application.validators.ChavePixValidator;
+import com.vitor.criar_chave_pix.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.persistence.repository.ChavePixServiceRepository;
 import org.springframework.stereotype.Service;
 
@@ -64,17 +65,12 @@ public class ChavePixService implements ChaveServicePort {
             clienteChavePix.setIdConta(cliente.get().getIdConta());
             clienteChavePix.setTipoPessoa(cliente.get().getTipoPessoa());
             clienteChavePix.setChavesPixList(cliente.get().getChavesPixList());
+
+            validaCpfExistente(clienteChavePix);
         }
 
         //verifica quantidade de chaves pix de acordo com o tipo pessoa
-        long count = clienteChavePix.getChavesPixList().size();
-
-        if ("PF".equals(clienteChavePix.getTipoPessoa()) && count >= 5) {
-            throw new IllegalStateException("Limite de 5 chaves Pix para Pessoa Física atingido.");
-        }
-        else if ("PJ".equals(clienteChavePix.getTipoPessoa()) && count >= 20) {
-            throw new IllegalStateException("Limite de 20 chaves Pix para Pessoa Jurídica atingido.");
-        }
+        validaLimiteChaves(clienteChavePix, clienteChavePix.getChavesPixList().size());
 
         //criar chave pix
         var newChavePix = new ChavesPix(null ,clienteChavePix.getChavesPix().getTipoChave(), clienteChavePix.getChavesPix().getValorChave(), null, null, true);
@@ -86,8 +82,29 @@ public class ChavePixService implements ChaveServicePort {
         return chavesPixCriada.getUuidChave();
     }
 
+    private void validaLimiteChaves(ClienteChavePix clienteChavePix, long count) {
+        if ("PF".equals(clienteChavePix.getTipoPessoa()) && count >= 5) {
+            throw new ValidationException("Limite de 5 chaves Pix para Pessoa Física atingido.");
+        }
+        else if ("PJ".equals(clienteChavePix.getTipoPessoa()) && count >= 20) {
+            throw new ValidationException("Limite de 20 chaves Pix para Pessoa Jurídica atingido.");
+        }
+    }
+
     //verifica tipoCliente
     private String verificaTipoPessoa(ClienteChavePix chavePix){
         return contaServicePort.verificaTipoPessoa(chavePix.getAgencia(), chavePix.getConta());
+    }
+
+    // Método para validar CPF existente
+    private void validaCpfExistente(ClienteChavePix clienteChavePix) {
+        if ("cpf".equals(clienteChavePix.getChavesPix().getTipoChave()) && !clienteChavePix.getChavesPixList().isEmpty()) {
+            var novoCpf = clienteChavePix.getChavesPix().getValorChave();
+            for (ChavesPix chave : clienteChavePix.getChavesPixList()) {
+                if ("cpf".equals(chave.getTipoChave()) && !chave.getValorChave().equals(novoCpf)) {
+                    throw new ValidationException("Já existe um CPF cadastrado para este cliente.");
+                }
+            }
+        }
     }
 }

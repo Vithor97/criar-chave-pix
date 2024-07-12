@@ -32,8 +32,6 @@ public class ContaEntity {
 
     @OneToMany(mappedBy = "conta", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ChavesEntity> chavesPixList;
-
-    // Construtor padrão
     public ContaEntity() {
     }
 
