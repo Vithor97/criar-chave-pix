@@ -12,4 +12,8 @@ public interface ChavePixServiceRepository {
     boolean chavepixExistente(String chavePix);
 
     ChavesPix salvaChavePix(ChavesPix chavePix, Long idConta);
+
+    Optional<Cliente> findClienteById(Long id);
+
+    Cliente alteraDadosCliente(Cliente clienteAlteracao, boolean agenciaContaIgual);
 }

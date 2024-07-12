@@ -29,6 +29,20 @@ public class ClienteConverter {
         );
     }
 
+
+    public static Cliente toContaDomain(ContaEntity entity) {
+
+        return new Cliente(
+                entity.getId(),
+                entity.getNomeCorrentista(),
+                entity.getSobrenomeCorrentista(),
+                entity.getTipoPessoa(),
+                entity.getAgencia(),
+                entity.getConta(),
+                entity.getTipoConta()
+        );
+    }
+
     public static ChavesPix toPixKeyDomain(ChavesEntity entity) {
         return new ChavesPix(
                 entity.getId(),
@@ -62,6 +76,18 @@ public class ClienteConverter {
                 cliente.getSobrenome(),
                 cliente.getTipoPessoa(),
                 null // Lista de chaves será preenchida separadamente
+        );
+    }
+
+    public static ContaEntity toContaEntity(Cliente cliente) {
+        return new ContaEntity(
+                cliente.getId(),
+                cliente.getTipoConta(),
+                cliente.getAgencia(),
+                cliente.getConta(),
+                cliente.getNome(),
+                cliente.getSobrenome(),
+                cliente.getTipoPessoa()
         );
     }
 

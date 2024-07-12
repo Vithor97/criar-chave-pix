@@ -5,7 +5,9 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-@Table(name = "TB_CONTA")
+@Table(name = "TB_CONTA", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"agencia", "conta"})
+})
 public class ContaEntity {
 
     @Id
@@ -46,6 +48,18 @@ public class ContaEntity {
         this.sobrenomeCorrentista = sobrenomeCorrentista;
         this.tipoPessoa = tipoPessoa;
         this.chavesPixList = chavesPixList;
+    }
+
+    public ContaEntity(Long id, String tipoConta, Integer agencia, Integer conta,
+                       String nomeCorrentista, String sobrenomeCorrentista, String tipoPessoa
+                       ) {
+        this.id = id;
+        this.tipoConta = tipoConta;
+        this.agencia = agencia;
+        this.conta = conta;
+        this.nomeCorrentista = nomeCorrentista;
+        this.sobrenomeCorrentista = sobrenomeCorrentista;
+        this.tipoPessoa = tipoPessoa;
     }
 
     public Long getId() {
