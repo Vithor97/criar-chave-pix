@@ -10,6 +10,8 @@ import com.vitor.criar_chave_pix.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.persistence.repository.ChavePixServiceRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -80,6 +82,26 @@ public class ChavePixService implements ChaveServicePort {
         clienteChavePix.getChavesPixList().add(chavesPixCriada);
 
         return chavesPixCriada.getUuidChave();
+    }
+
+
+    public Optional<ClienteChavePix> consultaChave(UUID uuidChave) {
+        return chavePixServiceRepository.buscarPorIdChave(uuidChave);
+    }
+
+    @Override
+    public List<ClienteChavePix> buscarChavesPixComFiltros(String tipoChave,
+                                                           Integer agencia,
+                                                           Integer conta,
+                                                           String nomeCorrentista,
+                                                           String sobrenomeCorrentista,
+                                                           LocalDate dataInclusao,
+                                                           LocalDate dataInativacao) {
+
+        if(dataInclusao != null && dataInativacao != null){
+            throw new ValidationException("Somente data de inclusão ou de inativação para a consulta");
+        }
+        return chavePixServiceRepository.buscarChavesPixComFiltros(tipoChave, agencia, conta, nomeCorrentista, sobrenomeCorrentista, dataInclusao, dataInativacao);
     }
 
     private void validaLimiteChaves(ClienteChavePix clienteChavePix, long count) {

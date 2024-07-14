@@ -10,13 +10,20 @@ import com.vitor.criar_chave_pix.persistence.entity.ContaEntity;
 import com.vitor.criar_chave_pix.persistence.repository.ChavePixServiceRepository;
 import com.vitor.criar_chave_pix.persistence.repository.ChavesRepository;
 import com.vitor.criar_chave_pix.persistence.repository.ContaRepository;
+import com.vitor.criar_chave_pix.persistence.repository.dto.ChavePixContaDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 public class PixKeyServiceRepositoryImpl implements ChavePixServiceRepository {
@@ -107,5 +114,37 @@ public class PixKeyServiceRepositoryImpl implements ChavePixServiceRepository {
         catch (Exception e){
             throw new IllegalArgumentException("Erro ao alterar dados do cliente.");
         }
+    }
+
+    @Override
+    public Optional<ClienteChavePix> buscarPorIdChave(UUID uuidChave) {
+        Optional<ChavePixContaDTO> chavesEntityOpt = chavesRepository.findByIdWithConta(uuidChave);
+        return chavesEntityOpt.map(ChavePixContaDTO::toDomain);
+    }
+
+    @Override
+    public List<ClienteChavePix> buscarChavesPixComFiltros(String tipoChave,
+                                                           Integer agencia,
+                                                           Integer conta,
+                                                           String nomeCorrentista,
+                                                           String sobrenomeCorrentista,
+                                                           LocalDate dataInclusao, LocalDate dataInativacao) {
+
+        LocalDateTime dataInclusaoInicio = (dataInclusao != null) ? dataInclusao.atStartOfDay() : null;
+        LocalDateTime dataInclusaoFim = (dataInclusao != null) ? dataInclusao.atTime(LocalTime.MAX) : null;
+
+        LocalDateTime dataInativacaoInicio = (dataInativacao != null) ? dataInativacao.atStartOfDay() : null;
+        LocalDateTime dataInativacaoFim = (dataInativacao != null) ? dataInativacao.atTime(LocalTime.MAX) : null;
+
+
+
+        List<ChavePixContaDTO> results = chavesRepository.findByAllFilters(
+                tipoChave, agencia, conta, nomeCorrentista, sobrenomeCorrentista,
+                dataInclusaoInicio, dataInclusaoFim,
+                dataInativacaoInicio, dataInativacaoFim);
+
+        return results.stream()
+                .map(ChavePixContaDTO::toDomain)
+                .collect(Collectors.toList());
     }
 }
