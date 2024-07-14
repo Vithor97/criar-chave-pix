@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.vitor</groupId>
-	<artifactId>criar-chave-pix</artifactId>
+	<artifactId>criar_chave_pix</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>criar-chave-pix</name>
+	<name>criar_chave_pix</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -91,11 +91,14 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-<!--				<configuration>-->
-<!--					<excludes>-->
-<!--						<exclude></exclude>-->
-<!--					</excludes>-->
-<!--				</configuration>-->
+				<version>0.8.12</version>
+				<configuration>
+					<excludes>
+						<exclude>com/vitor/criar_chave_pix/CriarChavePixApplication.class</exclude>
+						<exclude>com/vitor/criar_chave_pix/web/request/**</exclude>
+						<exclude>com/vitor/criar_chave_pix/web/response/**</exclude>
+					</excludes>
+				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -109,6 +112,7 @@
 							<goal>report</goal>
 						</goals>
 					</execution>
+
 				</executions>
 			</plugin>
 

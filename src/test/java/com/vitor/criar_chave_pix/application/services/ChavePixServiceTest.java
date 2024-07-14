@@ -151,7 +151,6 @@ class ChavePixServiceTest {
     @MethodSource("provideChavesInvalidas")
     public void criar_chavesPix_com_chaves_invalidas_retorna_excecao(ClienteChavePix clienteChavePix) {
         assertThatThrownBy(() -> chavePixService.criaChavePix(clienteChavePix)).isInstanceOf(ValidationException.class);
-
     }
 
 
