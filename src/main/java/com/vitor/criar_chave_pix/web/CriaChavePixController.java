@@ -7,6 +7,7 @@ import com.vitor.criar_chave_pix.application.ports.ContaServicePort;
 import com.vitor.criar_chave_pix.web.request.AlteraClienteRequest;
 import com.vitor.criar_chave_pix.web.request.CriaChaveRequest;
 import com.vitor.criar_chave_pix.web.response.AlteraClienteResponse;
+import com.vitor.criar_chave_pix.web.response.ChavePixDesativadaResponse;
 import com.vitor.criar_chave_pix.web.response.ConsultaChavePixResponse;
 import com.vitor.criar_chave_pix.web.response.CriaChaveResponse;
 import jakarta.validation.Valid;
@@ -73,7 +74,12 @@ public class CriaChavePixController {
                 .collect(Collectors.toList());
 
         return ResponseEntity.ok(response);
+    }
 
+    @DeleteMapping("/desativar/{id}")
+    public ResponseEntity<ChavePixDesativadaResponse> desativaChavePix(@PathVariable UUID id) {
+        var chaveDesativada = chaveServicePort.desativaChave(id);
+        return ResponseEntity.status(HttpStatus.OK).body(ChavePixDesativadaResponse.fromDomain(chaveDesativada));
     }
 
 

@@ -147,4 +147,44 @@ public class PixKeyServiceRepositoryImpl implements ChavePixServiceRepository {
                 .map(ChavePixContaDTO::toDomain)
                 .collect(Collectors.toList());
     }
+
+    @Override
+    @Transactional
+    public ClienteChavePix desativaChave(UUID id) {
+        Optional<ChavesEntity> chavesEntityOpt = chavesRepository.findById(id);
+        if(chavesEntityOpt.isEmpty()){
+            throw new ValidationException("Chave ja desativada");
+        }
+
+        var chaveEncontrada = chavesEntityOpt.get();
+        if(!chaveEncontrada.isAtivo()){
+            throw new ValidationException("Chave ja desativada");
+        }
+
+        LocalDateTime agora = LocalDateTime.now();
+        chavesRepository.desativarChave(id, agora);
+
+        chaveEncontrada.setAtivo(false);
+        chaveEncontrada.setDataInativacao(agora);
+
+        ContaEntity conta = chaveEncontrada.getConta();
+
+
+        return ClienteChavePix.builder()
+                .idConta(conta.getId())
+                .tipoConta(conta.getTipoConta())
+                .agencia(conta.getAgencia())
+                .conta(conta.getConta())
+                .tipoPessoa(conta.getTipoPessoa())
+                .nomeCorrentista(conta.getNomeCorrentista())
+                .sobrenomeCorrentista(conta.getSobrenomeCorrentista())
+                .chavesPix(new ChavesPix(
+                        chaveEncontrada.getId(),
+                        chaveEncontrada.getTipoChave(),
+                        chaveEncontrada.getValorChave(),
+                        chaveEncontrada.getDataRegistro(),
+                        chaveEncontrada.getDataInativacao(),
+                        chaveEncontrada.isAtivo()))
+                .build();
+    }
 }

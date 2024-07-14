@@ -113,4 +113,69 @@ public class ClienteChavePix {
     public void setChavesPixList(List<ChavesPix> chavesPixList) {
         this.chavesPixList = chavesPixList;
     }
+
+    public static ClienteChavePixBuilder builder() {
+        return new ClienteChavePixBuilder();
+    }
+
+    public static class ClienteChavePixBuilder {
+        private Long idConta;
+        private String tipoConta;
+        private Integer agencia;
+        private Integer conta;
+        private String tipoPessoa;
+        private String nomeCorrentista;
+        private String sobrenomeCorrentista;
+        private ChavesPix chavesPix;
+        private List<ChavesPix> chavesPixList;
+
+        public ClienteChavePixBuilder idConta(Long idConta) {
+            this.idConta = idConta;
+            return this;
+        }
+
+        public ClienteChavePixBuilder tipoConta(String tipoConta) {
+            this.tipoConta = tipoConta;
+            return this;
+        }
+
+        public ClienteChavePixBuilder agencia(Integer agencia) {
+            this.agencia = agencia;
+            return this;
+        }
+
+        public ClienteChavePixBuilder conta(Integer conta) {
+            this.conta = conta;
+            return this;
+        }
+
+        public ClienteChavePixBuilder tipoPessoa(String tipoPessoa) {
+            this.tipoPessoa = tipoPessoa;
+            return this;
+        }
+
+        public ClienteChavePixBuilder nomeCorrentista(String nomeCorrentista) {
+            this.nomeCorrentista = nomeCorrentista;
+            return this;
+        }
+
+        public ClienteChavePixBuilder sobrenomeCorrentista(String sobrenomeCorrentista) {
+            this.sobrenomeCorrentista = sobrenomeCorrentista;
+            return this;
+        }
+
+        public ClienteChavePixBuilder chavesPix(ChavesPix chavesPix) {
+            this.chavesPix = chavesPix;
+            return this;
+        }
+
+        public ClienteChavePixBuilder chavesPixList(List<ChavesPix> chavesPixList) {
+            this.chavesPixList = chavesPixList;
+            return this;
+        }
+
+        public ClienteChavePix build() {
+            return new ClienteChavePix(idConta, tipoConta, agencia, conta, tipoPessoa, nomeCorrentista, sobrenomeCorrentista, chavesPix, chavesPixList);
+        }
+    }
 }

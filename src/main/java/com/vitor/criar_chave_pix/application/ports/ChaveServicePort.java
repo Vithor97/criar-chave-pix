@@ -20,4 +20,6 @@ public interface ChaveServicePort {
                                                     String sobrenomeCorrentista,
                                                     LocalDate dataInclusao,
                                                     LocalDate dataInativacao);
+
+    ClienteChavePix desativaChave(UUID id);
 }

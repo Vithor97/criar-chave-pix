@@ -3,6 +3,7 @@ package com.vitor.criar_chave_pix.persistence.repository;
 import com.vitor.criar_chave_pix.persistence.entity.ChavesEntity;
 import com.vitor.criar_chave_pix.persistence.repository.dto.ChavePixContaDTO;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -48,4 +49,10 @@ public interface ChavesRepository extends JpaRepository<ChavesEntity, UUID> {
             @Param("dataInativacao") LocalDateTime dataInativacao,
             @Param("dataInativacaoFim") LocalDateTime dataInativacaoFim
     );
+
+    Optional<ChavesEntity> findByIdAndAtivo(UUID id, boolean ativo);
+
+    @Modifying
+    @Query(value = "UPDATE tb_chave_pix SET ativo = false, data_inativacao = :dataInativacao WHERE id = :id", nativeQuery = true)
+    void desativarChave(@Param("id") UUID id, @Param("dataInativacao") LocalDateTime dataInativacao);
 }

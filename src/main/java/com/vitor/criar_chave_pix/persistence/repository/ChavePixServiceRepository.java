@@ -30,4 +30,6 @@ public interface ChavePixServiceRepository {
             String sobrenomeCorrentista,
             LocalDate dataInclusao,
             LocalDate dataInativacao);
+
+    ClienteChavePix desativaChave(UUID id);
 }

@@ -104,6 +104,11 @@ public class ChavePixService implements ChaveServicePort {
         return chavePixServiceRepository.buscarChavesPixComFiltros(tipoChave, agencia, conta, nomeCorrentista, sobrenomeCorrentista, dataInclusao, dataInativacao);
     }
 
+    @Override
+    public ClienteChavePix desativaChave(UUID id) {
+        return chavePixServiceRepository.desativaChave(id);
+    }
+
     private void validaLimiteChaves(ClienteChavePix clienteChavePix, long count) {
         if ("PF".equals(clienteChavePix.getTipoPessoa()) && count >= 5) {
             throw new ValidationException("Limite de 5 chaves Pix para Pessoa Física atingido.");
