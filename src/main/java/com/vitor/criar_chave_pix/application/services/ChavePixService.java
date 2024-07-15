@@ -118,12 +118,11 @@ public class ChavePixService implements ChaveServicePort {
         }
     }
 
-    //verifica tipoCliente
+
     private String verificaTipoPessoa(ClienteChavePix chavePix){
         return contaServicePort.verificaTipoPessoa(chavePix.getAgencia(), chavePix.getConta());
     }
 
-    // Método para validar CPF existente
     private void validaCpfExistente(ClienteChavePix clienteChavePix) {
         if ("cpf".equals(clienteChavePix.getChavesPix().getTipoChave()) && !clienteChavePix.getChavesPixList().isEmpty()) {
             var novoCpf = clienteChavePix.getChavesPix().getValorChave();
