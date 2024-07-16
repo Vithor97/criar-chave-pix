@@ -5,8 +5,8 @@ import com.vitor.criar_chave_pix.application.domain.Cliente;
 import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
 import com.vitor.criar_chave_pix.application.ports.ContaServicePort;
 import com.vitor.criar_chave_pix.commons.ConsultaChavePixConstants;
-import com.vitor.criar_chave_pix.exceptions.ValidationException;
-import com.vitor.criar_chave_pix.persistence.repository.ChavePixServiceRepository;
+import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
+import com.vitor.criar_chave_pix.application.ports.persistence.ChavePixServicePersistencePort;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -38,7 +38,7 @@ class ChavePixServiceTest {
     private ContaServicePort contaServicePort;
 
     @Mock
-    private ChavePixServiceRepository chavePixServiceRepository;
+    private ChavePixServicePersistencePort chavePixServiceRepository;
 
     @InjectMocks
     private ChavePixService chavePixService;

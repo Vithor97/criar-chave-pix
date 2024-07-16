@@ -1,4 +1,4 @@
-package com.vitor.criar_chave_pix.web.request;
+package com.vitor.criar_chave_pix.adapter.input.web.request;
 
 import com.vitor.criar_chave_pix.application.domain.Cliente;
 import jakarta.validation.constraints.*;

@@ -1,4 +1,4 @@
-package com.vitor.criar_chave_pix.persistence.repository;
+package com.vitor.criar_chave_pix.application.ports.persistence;
 
 import com.vitor.criar_chave_pix.application.domain.ChavesPix;
 import com.vitor.criar_chave_pix.application.domain.Cliente;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface ChavePixServiceRepository {
+public interface ChavePixServicePersistencePort {
     Optional<ClienteChavePix> buscaAgenciaConta(Integer agencia, Integer conta);
     Cliente insereCliente(Cliente cliente);
     boolean chavepixExistente(String chavePix);

@@ -1,10 +1,10 @@
-package com.vitor.criar_chave_pix.converter;
+package com.vitor.criar_chave_pix.adapter.converter;
 
 import com.vitor.criar_chave_pix.application.domain.ChavesPix;
 import com.vitor.criar_chave_pix.application.domain.Cliente;
 import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
-import com.vitor.criar_chave_pix.persistence.entity.ChavesEntity;
-import com.vitor.criar_chave_pix.persistence.entity.ContaEntity;
+import com.vitor.criar_chave_pix.adapter.output.persistence.entity.ChavesEntity;
+import com.vitor.criar_chave_pix.adapter.output.persistence.entity.ContaEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;

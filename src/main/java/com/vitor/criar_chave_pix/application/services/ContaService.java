@@ -3,8 +3,8 @@ package com.vitor.criar_chave_pix.application.services;
 import com.vitor.criar_chave_pix.application.domain.Cliente;
 import com.vitor.criar_chave_pix.application.ports.ContaServicePort;
 import com.vitor.criar_chave_pix.application.validators.ClienteValidator;
-import com.vitor.criar_chave_pix.exceptions.ValidationException;
-import com.vitor.criar_chave_pix.persistence.repository.ChavePixServiceRepository;
+import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
+import com.vitor.criar_chave_pix.application.ports.persistence.ChavePixServicePersistencePort;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,9 +13,9 @@ import java.util.Random;
 @Service
 public class ContaService implements ContaServicePort {
 
-    private final ChavePixServiceRepository chavePixServiceRepository;
+    private final ChavePixServicePersistencePort chavePixServiceRepository;
 
-    public ContaService(ChavePixServiceRepository chavePixServiceRepository) {
+    public ContaService(ChavePixServicePersistencePort chavePixServiceRepository) {
         this.chavePixServiceRepository = chavePixServiceRepository;
     }
 
@@ -42,4 +42,6 @@ public class ContaService implements ContaServicePort {
 
         return chavePixServiceRepository.alteraDadosCliente(clienteAlteracao,agenciaContaIgual);
     }
+
+
 }

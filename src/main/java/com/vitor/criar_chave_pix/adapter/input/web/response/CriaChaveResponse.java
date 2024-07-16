@@ -1,4 +1,4 @@
-package com.vitor.criar_chave_pix.web.response;
+package com.vitor.criar_chave_pix.adapter.input.web.response;
 
 import java.util.UUID;
 

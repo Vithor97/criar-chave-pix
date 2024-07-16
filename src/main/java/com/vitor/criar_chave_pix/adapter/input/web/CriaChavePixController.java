@@ -1,15 +1,15 @@
-package com.vitor.criar_chave_pix.web;
+package com.vitor.criar_chave_pix.adapter.input.web;
 
 
+import com.vitor.criar_chave_pix.adapter.input.web.request.AlteraClienteRequest;
+import com.vitor.criar_chave_pix.adapter.input.web.response.AlteraClienteResponse;
+import com.vitor.criar_chave_pix.adapter.input.web.response.ChavePixDesativadaResponse;
+import com.vitor.criar_chave_pix.adapter.input.web.response.ConsultaChavePixResponse;
+import com.vitor.criar_chave_pix.adapter.input.web.response.CriaChaveResponse;
 import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
 import com.vitor.criar_chave_pix.application.ports.ChaveServicePort;
 import com.vitor.criar_chave_pix.application.ports.ContaServicePort;
-import com.vitor.criar_chave_pix.web.request.AlteraClienteRequest;
-import com.vitor.criar_chave_pix.web.request.CriaChaveRequest;
-import com.vitor.criar_chave_pix.web.response.AlteraClienteResponse;
-import com.vitor.criar_chave_pix.web.response.ChavePixDesativadaResponse;
-import com.vitor.criar_chave_pix.web.response.ConsultaChavePixResponse;
-import com.vitor.criar_chave_pix.web.response.CriaChaveResponse;
+import com.vitor.criar_chave_pix.adapter.input.web.request.CriaChaveRequest;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;

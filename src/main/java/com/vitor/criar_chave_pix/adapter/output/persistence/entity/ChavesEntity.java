@@ -1,4 +1,4 @@
-package com.vitor.criar_chave_pix.persistence.entity;
+package com.vitor.criar_chave_pix.adapter.output.persistence.entity;
 
 import jakarta.persistence.*;
 

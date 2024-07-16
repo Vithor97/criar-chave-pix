@@ -1,6 +1,6 @@
-package com.vitor.criar_chave_pix.persistence.repository;
+package com.vitor.criar_chave_pix.adapter.output.persistence.repository;
 
-import com.vitor.criar_chave_pix.persistence.entity.ContaEntity;
+import com.vitor.criar_chave_pix.adapter.output.persistence.entity.ContaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

@@ -6,8 +6,8 @@ import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
 import com.vitor.criar_chave_pix.application.ports.ChaveServicePort;
 import com.vitor.criar_chave_pix.application.ports.ContaServicePort;
 import com.vitor.criar_chave_pix.application.validators.ChavePixValidator;
-import com.vitor.criar_chave_pix.exceptions.ValidationException;
-import com.vitor.criar_chave_pix.persistence.repository.ChavePixServiceRepository;
+import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
+import com.vitor.criar_chave_pix.application.ports.persistence.ChavePixServicePersistencePort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -20,9 +20,9 @@ public class ChavePixService implements ChaveServicePort {
 
     private final ContaServicePort contaServicePort;
 
-    private final ChavePixServiceRepository chavePixServiceRepository;
+    private final ChavePixServicePersistencePort chavePixServiceRepository;
 
-    public ChavePixService(ContaServicePort contaServicePort, ChavePixServiceRepository chavePixServiceRepository) {
+    public ChavePixService(ContaServicePort contaServicePort, ChavePixServicePersistencePort chavePixServiceRepository) {
         this.contaServicePort = contaServicePort;
         this.chavePixServiceRepository = chavePixServiceRepository;
     }

@@ -1,8 +1,8 @@
 package com.vitor.criar_chave_pix.application.services;
 
 import com.vitor.criar_chave_pix.application.domain.Cliente;
-import com.vitor.criar_chave_pix.exceptions.ValidationException;
-import com.vitor.criar_chave_pix.persistence.repository.ChavePixServiceRepository;
+import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
+import com.vitor.criar_chave_pix.application.ports.persistence.ChavePixServicePersistencePort;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -29,7 +29,7 @@ class ContaServiceTest {
     ContaService contaService;
 
     @Mock
-    private ChavePixServiceRepository chavePixServiceRepository;
+    private ChavePixServicePersistencePort chavePixServiceRepository;
 
     @Test
     void verificaTipoPessoa() {

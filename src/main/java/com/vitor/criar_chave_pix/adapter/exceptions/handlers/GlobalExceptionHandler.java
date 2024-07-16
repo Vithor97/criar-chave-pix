@@ -1,6 +1,6 @@
-package com.vitor.criar_chave_pix.exceptions.handlers;
+package com.vitor.criar_chave_pix.adapter.exceptions.handlers;
 
-import com.vitor.criar_chave_pix.exceptions.ValidationException;
+import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

@@ -1,4 +1,4 @@
-package com.vitor.criar_chave_pix.persistence.repository.dto;
+package com.vitor.criar_chave_pix.adapter.output.persistence.repository.dto;
 
 import com.vitor.criar_chave_pix.application.domain.ChavesPix;
 import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
