@@ -44,32 +44,47 @@ public class ChavePixService implements ChaveServicePort {
         }
 
         //busca informações da conta
-        Optional<ClienteChavePix> cliente = chavePixServiceRepository.buscaAgenciaConta(agencia, conta);
+        //Optional<ClienteChavePix> cliente = chavePixServiceRepository.buscaAgenciaConta(agencia, conta);
+        chavePixServiceRepository.buscaAgenciaConta(agencia, conta).ifPresentOrElse(cliente ->{
+            clienteChavePix.setIdConta(cliente.getIdConta());
+            clienteChavePix.setTipoPessoa(cliente.getTipoPessoa());
+            clienteChavePix.setChavesPixList(cliente.getChavesPixList());
 
-
-        //se não existir salva o cliente e a chave pix
-        if(cliente.isEmpty()){
+            validaCpfExistente(clienteChavePix);
+        }, ()->{
             String tipoPessoa = verificaTipoPessoa(clienteChavePix);
-            var clienteCriado = chavePixServiceRepository.insereCliente(
-                    new Cliente(clienteChavePix.getNomeCorrentista(),
-                            clienteChavePix.getSobrenomeCorrentista(),
-                            tipoPessoa,
-                            agencia,
-                            conta,
-                            clienteChavePix.getTipoConta()
-                    ));
+            var clienteEntity = geraClienteEntity(clienteChavePix, agencia, conta, tipoPessoa);
+
+            var clienteCriado = chavePixServiceRepository.insereCliente(clienteEntity);
 
             clienteChavePix.setIdConta(clienteCriado.getId());
             clienteChavePix.setTipoPessoa(tipoPessoa);
-        }
-        //caso contrario atualiza o id da conta, tipoPessoa a lista de chaves
-        else {
-            clienteChavePix.setIdConta(cliente.get().getIdConta());
-            clienteChavePix.setTipoPessoa(cliente.get().getTipoPessoa());
-            clienteChavePix.setChavesPixList(cliente.get().getChavesPixList());
+        });
 
-            validaCpfExistente(clienteChavePix);
-        }
+
+        //se não existir salva o cliente e a chave pix
+//        if(cliente.isEmpty()){
+//            String tipoPessoa = verificaTipoPessoa(clienteChavePix);
+//            var clienteCriado = chavePixServiceRepository.insereCliente(
+//                    new Cliente(clienteChavePix.getNomeCorrentista(),
+//                            clienteChavePix.getSobrenomeCorrentista(),
+//                            tipoPessoa,
+//                            agencia,
+//                            conta,
+//                            clienteChavePix.getTipoConta()
+//                    ));
+//
+//            clienteChavePix.setIdConta(clienteCriado.getId());
+//            clienteChavePix.setTipoPessoa(tipoPessoa);
+//        }
+//        //caso contrario atualiza o id da conta, tipoPessoa a lista de chaves
+//        else {
+//            clienteChavePix.setIdConta(cliente.get().getIdConta());
+//            clienteChavePix.setTipoPessoa(cliente.get().getTipoPessoa());
+//            clienteChavePix.setChavesPixList(cliente.get().getChavesPixList());
+//
+//            validaCpfExistente(clienteChavePix);
+//        }
 
         //verifica quantidade de chaves pix de acordo com o tipo pessoa
         validaLimiteChaves(clienteChavePix, clienteChavePix.getChavesPixList().size());
@@ -79,9 +94,19 @@ public class ChavePixService implements ChaveServicePort {
         var chavesPixCriada = chavePixServiceRepository.salvaChavePix(newChavePix, clienteChavePix.getIdConta());
 
         //adicionar a lista de chaves ao dominio
-        clienteChavePix.getChavesPixList().add(chavesPixCriada);
+        //clienteChavePix.getChavesPixList().add(chavesPixCriada);
 
         return chavesPixCriada.getUuidChave();
+    }
+
+    private Cliente geraClienteEntity(ClienteChavePix clienteChavePix, Integer agencia, Integer conta, String tipoPessoa) {
+        return new Cliente(clienteChavePix.getNomeCorrentista(),
+                clienteChavePix.getSobrenomeCorrentista(),
+                tipoPessoa,
+                agencia,
+                conta,
+                clienteChavePix.getTipoConta()
+        );
     }
 
 

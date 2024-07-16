@@ -153,7 +153,7 @@ public class PixKeyServiceRepositoryImpl implements ChavePixServiceRepository {
     public ClienteChavePix desativaChave(UUID id) {
         Optional<ChavesEntity> chavesEntityOpt = chavesRepository.findById(id);
         if(chavesEntityOpt.isEmpty()){
-            throw new ValidationException("Chave ja desativada");
+            throw new ValidationException("Chave nao enconstrada");
         }
 
         var chaveEncontrada = chavesEntityOpt.get();
