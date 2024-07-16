@@ -8,7 +8,6 @@ import java.util.Collections;
 
 public record CriaChaveRequest (
 
-
         @NotNull
         @NotBlank
         String tipoChave,
