@@ -1,5 +1,6 @@
 package com.vitor.criar_chave_pix.adapter.exceptions.handlers;
 
+import com.vitor.criar_chave_pix.adapter.exceptions.NaoEncontradoException;
 import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +32,13 @@ public class GlobalExceptionHandler {
         Map<String, String> errorResponse = new HashMap<>();
         errorResponse.put("erro", ex.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(NaoEncontradoException.class)
+    public ResponseEntity<?> handleNaoEncontradoException(NaoEncontradoException ex) {
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("erro", ex.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(Exception.class)

@@ -1,5 +1,6 @@
 package com.vitor.criar_chave_pix.application.services;
 
+import com.vitor.criar_chave_pix.adapter.exceptions.NaoEncontradoException;
 import com.vitor.criar_chave_pix.application.domain.Cliente;
 import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.application.ports.persistence.ChavePixServicePersistencePort;
@@ -86,7 +87,7 @@ class ContaServiceTest {
         long id = 1L;
         when(chavePixServiceRepository.findClienteById(id)).thenReturn(Optional.empty());
         assertThatThrownBy(() -> contaService.alteraDadosConta(id, ALTERACAO_NOME_DADOS_CLIENTE_ALTERADO))
-                .isInstanceOf(ValidationException.class)
+                .isInstanceOf(NaoEncontradoException.class)
                 .hasMessage("Cliente não encontrado");
     }
 

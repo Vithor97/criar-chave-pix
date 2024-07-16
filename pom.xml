@@ -98,6 +98,8 @@
 						<exclude>com/vitor/criar_chave_pix/adapter/input/web/request/**</exclude>
 						<exclude>com/vitor/criar_chave_pix/adapter/input/web/response/**</exclude>
 						<exclude>com/vitor/criar_chave_pix/application/ports/**</exclude>
+<!--						<exclude>com/vitor/criar_chave_pix/adapter/output/persistence/**</exclude>-->
+
 					</excludes>
 					<rules>
 						<rule>

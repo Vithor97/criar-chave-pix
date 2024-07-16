@@ -1,10 +1,10 @@
 package com.vitor.criar_chave_pix.application.services;
 
+import com.vitor.criar_chave_pix.adapter.exceptions.NaoEncontradoException;
 import com.vitor.criar_chave_pix.application.domain.Cliente;
 import com.vitor.criar_chave_pix.application.ports.ContaServicePort;
-import com.vitor.criar_chave_pix.application.validators.ClienteValidator;
-import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.application.ports.persistence.ChavePixServicePersistencePort;
+import com.vitor.criar_chave_pix.application.validators.ClienteValidator;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -30,7 +30,7 @@ public class ContaService implements ContaServicePort {
 
         Optional<Cliente> clienteBase = chavePixServiceRepository.findClienteById(id);
         if (clienteBase.isEmpty()){
-            throw new ValidationException("Cliente não encontrado");
+            throw new NaoEncontradoException("Cliente não encontrado");
         }
         var clientEncontrado = clienteBase.get();
 

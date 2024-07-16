@@ -1,16 +1,17 @@
 package com.vitor.criar_chave_pix.adapter.output.persistence.repository.impl;
 
+import com.vitor.criar_chave_pix.adapter.converter.ClienteConverter;
+import com.vitor.criar_chave_pix.adapter.exceptions.NaoEncontradoException;
+import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.adapter.output.persistence.entity.ChavesEntity;
+import com.vitor.criar_chave_pix.adapter.output.persistence.entity.ContaEntity;
 import com.vitor.criar_chave_pix.adapter.output.persistence.repository.ChavesRepository;
 import com.vitor.criar_chave_pix.adapter.output.persistence.repository.ContaRepository;
+import com.vitor.criar_chave_pix.adapter.output.persistence.repository.dto.ChavePixContaDTO;
 import com.vitor.criar_chave_pix.application.domain.ChavesPix;
 import com.vitor.criar_chave_pix.application.domain.Cliente;
 import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
-import com.vitor.criar_chave_pix.adapter.converter.ClienteConverter;
-import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
-import com.vitor.criar_chave_pix.adapter.output.persistence.entity.ContaEntity;
 import com.vitor.criar_chave_pix.application.ports.persistence.ChavePixServicePersistencePort;
-import com.vitor.criar_chave_pix.adapter.output.persistence.repository.dto.ChavePixContaDTO;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
@@ -103,7 +104,7 @@ public class PixKeyServiceRepositoryImpl implements ChavePixServicePersistencePo
             entityManager.clear();
 
             ContaEntity updatedContaEntity = contaRepository.findById(clienteAlteracao.getId())
-                                        .orElseThrow(() -> new IllegalArgumentException("Cliente não encontrado."));
+                                        .orElseThrow(() -> new NaoEncontradoException("Cliente não encontrado."));
 
             return ClienteConverter.toContaDomain(updatedContaEntity);
 
