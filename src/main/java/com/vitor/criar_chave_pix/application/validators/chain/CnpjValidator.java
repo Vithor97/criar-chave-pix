@@ -1,13 +1,13 @@
 package com.vitor.criar_chave_pix.application.validators.chain;
 
 import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
-import com.vitor.criar_chave_pix.application.validators.TipoChave;
 
-public class TipoChaveValidator extends AbstractValidator {
+public class CnpjValidator extends AbstractValidator {
     @Override
     public void validate(String tipoChave, String valorChave) {
-        if (!TipoChave.isValid(tipoChave)) {
-            throw new ValidationException("Campo tipoChave inválido: " + tipoChave);
+        if ("cnpj".equalsIgnoreCase(tipoChave) &&
+                (valorChave == null || !valorChave.matches("\\d{14}"))) {
+            throw new ValidationException("CNPJ inválido. Deve conter 14 digitos.");
         } else if (nextValidator != null) {
             nextValidator.validate(tipoChave, valorChave);
         }

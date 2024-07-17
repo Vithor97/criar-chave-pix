@@ -62,10 +62,8 @@ class ChavePixServiceTest {
         when(contaServicePort.verificaTipoPessoa(any(Integer.class), any(Integer.class)))
                 .thenReturn("PF");
 
-        // Act
         UUID uuid = chavePixService.criaChavePix(CLIENTE_CHAVE_PIXV_VALIDO);
 
-        // Assert
         assertNotNull(uuid);
     }
 
@@ -189,19 +187,50 @@ class ChavePixServiceTest {
                         new ChavesPix(null, "cpf", "9999999999", null, null, true), null
                 )),
                 Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
-                        new ChavesPix(null, "cnpj", "9999999999", null, null, true), null
+                        new ChavesPix(null, "cpf", null, null, null, true), null
+                )),
+                Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
+                        new ChavesPix(null, "cnpj", "99999199999", null, null, true), null
+                )),
+                Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
+                        new ChavesPix(null, "cnpj", null, null, null, true), null
                 )),
                 Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
                         new ChavesPix(null, "email", "emailinvalido", null, null, true), null
                 )),
                 Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
+                        new ChavesPix(null, "email", null, null, null, true), null
+                )),
+                Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
+                        new ChavesPix(null, "email",
+                                "vitor@emailvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalorvalor.com",
+                                null, null, true), null
+                )),
+                Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
                         new ChavesPix(null, "celular", "1111111", null, null, true), null
                 )),
+
                 Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
                         new ChavesPix(null, "chave_aleatoria", "blablablab1232nfdjsnfjksfnjkehfewhfjkebfkjewbfjkewbfjkwebfjkbwefjbewjkfbewk@fjerfjerfjbrfrejfberjfbj", null, null, true), null
                 )),
+
+                Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
+                        new ChavesPix(null, "chave_aleatoria", null, null, null, true), null
+                )),
                 Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
                         new ChavesPix(null, "tipoChaveInexistente", "122345", null, null, true), null
+                )),
+                Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
+                        new ChavesPix(null, "celular", "111111111", null, null, true), null
+                )),
+                Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
+                        new ChavesPix(null, "celular", null, null, null, true), null
+                )),
+                Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
+                        new ChavesPix(null, "cnpj", "1234", null, null, true), null
+                )),
+                Arguments.of(new ClienteChavePix(null, "corrente", 1234, 12345678, "PF", "Vitor", "Silva",
+                        new ChavesPix(null, "cnpj", null, null, null, true), null
                 ))
         );
     }

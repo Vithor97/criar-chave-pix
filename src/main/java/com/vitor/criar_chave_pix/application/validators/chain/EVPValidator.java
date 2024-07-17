@@ -1,13 +1,13 @@
 package com.vitor.criar_chave_pix.application.validators.chain;
 
 import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
-import com.vitor.criar_chave_pix.application.validators.TipoChave;
 
-public class TipoChaveValidator extends AbstractValidator {
+public class EVPValidator extends AbstractValidator {
     @Override
     public void validate(String tipoChave, String valorChave) {
-        if (!TipoChave.isValid(tipoChave)) {
-            throw new ValidationException("Campo tipoChave inválido: " + tipoChave);
+        if ("chave_aleatoria".equalsIgnoreCase(tipoChave) &&
+                (valorChave == null || !valorChave.matches("^[a-zA-Z0-9]{1,36}$"))) {
+            throw new ValidationException("Chave aleatória inválida. Deve conter apenas letras e números.");
         } else if (nextValidator != null) {
             nextValidator.validate(tipoChave, valorChave);
         }

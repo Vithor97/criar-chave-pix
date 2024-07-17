@@ -46,6 +46,7 @@ public class ChavePixServiceContants {
     );
 
 
+
     public static final ClienteChavePix CLIENTE_EXISTENTE_CHAVEPIX_CPF_EXISTENTE_INVALIDO_ = new ClienteChavePix(
             1L,
             "corrente",
@@ -108,4 +109,32 @@ public class ChavePixServiceContants {
                     new ChavesPix(UUID.randomUUID(), "email", "vitor19@email.com", LocalDateTime.now(), null, true)
             )
     );
+
+
+    ///invalidos
+
+    public static final ClienteChavePix CLIENTE_NAO_EXISTENTE_CHAVE_PIX_EMAIL_INVALIDO = new ClienteChavePix(
+            1L,
+            "corrente",
+            1234,
+            12345678,
+            "PJ",
+            "Vitor",
+            "Silva",
+            new ChavesPix(UUID.randomUUID(), "email", "vitoremail.com", LocalDateTime.now(), null, true),
+            null
+    );
+
+    public static final ClienteChavePix CLIENTE_NAO_EXISTENTE_CHAVE_PIX_CNPJ_INVALIDO = new ClienteChavePix(
+            1L,
+            "corrente",
+            1234,
+            12345678,
+            "PJ",
+            "Vitor",
+            "Silva",
+            new ChavesPix(UUID.randomUUID(), "email", "vitoremail.com", LocalDateTime.now(), null, true),
+            null
+    );
+
 }

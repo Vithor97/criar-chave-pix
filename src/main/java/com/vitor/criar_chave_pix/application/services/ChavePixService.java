@@ -1,13 +1,13 @@
 package com.vitor.criar_chave_pix.application.services;
 
+import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.application.domain.ChavesPix;
 import com.vitor.criar_chave_pix.application.domain.Cliente;
 import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
 import com.vitor.criar_chave_pix.application.ports.ChaveServicePort;
 import com.vitor.criar_chave_pix.application.ports.ContaServicePort;
-import com.vitor.criar_chave_pix.application.validators.ChavePixValidator;
-import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.application.ports.persistence.ChavePixServicePersistencePort;
+import com.vitor.criar_chave_pix.application.validators.ChavePixValidatorChain;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -22,9 +22,12 @@ public class ChavePixService implements ChaveServicePort {
 
     private final ChavePixServicePersistencePort chavePixServiceRepository;
 
+    private final ChavePixValidatorChain chavePixValidatorChain;
+
     public ChavePixService(ContaServicePort contaServicePort, ChavePixServicePersistencePort chavePixServiceRepository) {
         this.contaServicePort = contaServicePort;
         this.chavePixServiceRepository = chavePixServiceRepository;
+        this.chavePixValidatorChain = new ChavePixValidatorChain();
     }
 
     @Override
@@ -35,7 +38,8 @@ public class ChavePixService implements ChaveServicePort {
         var chavePix = clienteChavePix.getChavesPix().getValorChave();
         var tipooChave = clienteChavePix.getChavesPix().getTipoChave();
 
-        ChavePixValidator.validate(tipooChave, chavePix);
+        chavePixValidatorChain.validate(tipooChave, chavePix);
+        //ChavePixValidator.validate(tipooChave, chavePix);
 
 
         //verificar se chave pix existe no repositorio, se ja existir lança exception

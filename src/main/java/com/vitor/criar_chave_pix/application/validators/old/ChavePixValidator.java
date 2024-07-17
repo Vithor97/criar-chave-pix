@@ -1,6 +1,7 @@
-package com.vitor.criar_chave_pix.application.validators;
+package com.vitor.criar_chave_pix.application.validators.old;
 
 import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
+import com.vitor.criar_chave_pix.application.validators.TipoChave;
 
 public class ChavePixValidator {
 
