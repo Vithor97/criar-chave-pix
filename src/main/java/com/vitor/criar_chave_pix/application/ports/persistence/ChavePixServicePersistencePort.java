@@ -18,7 +18,7 @@ public interface ChavePixServicePersistencePort {
 
     Optional<Cliente> findClienteById(Long id);
 
-    Cliente alteraDadosCliente(Cliente clienteAlteracao, boolean agenciaContaIgual);
+    void alteraDadosCliente(Cliente clienteAlteracao, boolean agenciaContaIgual);
 
     Optional<ClienteChavePix> buscarPorIdChave(UUID uuidChave);
 

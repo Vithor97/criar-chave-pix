@@ -40,8 +40,9 @@ public class ContaService implements ContaServicePort {
         ClienteValidator.validarAlteracao(clientEncontrado, clienteAlteracao);
         clienteAlteracao.setId(id);
 
-        return chavePixServiceRepository.alteraDadosCliente(clienteAlteracao,agenciaContaIgual);
-    }
+        chavePixServiceRepository.alteraDadosCliente(clienteAlteracao,agenciaContaIgual);
 
+        return chavePixServiceRepository.findClienteById(id).orElseThrow(() -> new NaoEncontradoException("Cliente não encontrado após atualização"));
+    }
 
 }

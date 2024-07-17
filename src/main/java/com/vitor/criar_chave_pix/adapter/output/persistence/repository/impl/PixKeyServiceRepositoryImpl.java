@@ -1,7 +1,6 @@
 package com.vitor.criar_chave_pix.adapter.output.persistence.repository.impl;
 
 import com.vitor.criar_chave_pix.adapter.converter.ClienteConverter;
-import com.vitor.criar_chave_pix.adapter.exceptions.NaoEncontradoException;
 import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.adapter.output.persistence.entity.ChavesEntity;
 import com.vitor.criar_chave_pix.adapter.output.persistence.entity.ContaEntity;
@@ -12,8 +11,6 @@ import com.vitor.criar_chave_pix.application.domain.ChavesPix;
 import com.vitor.criar_chave_pix.application.domain.Cliente;
 import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
 import com.vitor.criar_chave_pix.application.ports.persistence.ChavePixServicePersistencePort;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Repository;
@@ -32,8 +29,6 @@ public class PixKeyServiceRepositoryImpl implements ChavePixServicePersistencePo
     private final ContaRepository contaRepository;
     private final ChavesRepository chavesRepository;
 
-    @PersistenceContext
-    private EntityManager entityManager;
 
     public PixKeyServiceRepositoryImpl(ContaRepository contaRepository, ChavesRepository chavesRepository) {
         this.contaRepository = contaRepository;
@@ -79,7 +74,7 @@ public class PixKeyServiceRepositoryImpl implements ChavePixServicePersistencePo
 
     @Override
     @Transactional
-    public Cliente alteraDadosCliente(Cliente clienteAlteracao, boolean agenciaContaIgual) {
+    public void alteraDadosCliente(Cliente clienteAlteracao, boolean agenciaContaIgual) {
         try {
             if(agenciaContaIgual){
                 contaRepository.atualizaDadosCliente(
@@ -99,21 +94,9 @@ public class PixKeyServiceRepositoryImpl implements ChavePixServicePersistencePo
                         clienteAlteracao.getConta()
                 );
             }
-
-
-            entityManager.clear();
-
-            ContaEntity updatedContaEntity = contaRepository.findById(clienteAlteracao.getId())
-                                        .orElseThrow(() -> new NaoEncontradoException("Cliente não encontrado."));
-
-            return ClienteConverter.toContaDomain(updatedContaEntity);
-
         }
         catch (DataIntegrityViolationException e){
             throw new ValidationException("Erro ao alterar dados do cliente. Agencia e Conta já existem para outro cliente.");
-        }
-        catch (Exception e){
-            throw new IllegalArgumentException("Erro ao alterar dados do cliente.");
         }
     }
 

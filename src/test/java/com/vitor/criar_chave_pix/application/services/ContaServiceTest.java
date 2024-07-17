@@ -21,6 +21,7 @@ import static com.vitor.criar_chave_pix.commons.ContaServiceConstants.ALTERACAO_
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,8 +45,7 @@ class ContaServiceTest {
     public void alteraDadosCliente_e_conta_igual_retorna_sucesso(){
         long id = 1L;
         when(chavePixServiceRepository.findClienteById(id)).thenReturn(Optional.of(ALTERACAO_NOME_DADOS_CLIENTE_VALIDO));
-        when(chavePixServiceRepository.alteraDadosCliente(ALTERACAO_NOME_DADOS_CLIENTE_ALTERADO, true))
-                .thenReturn(ALTERACAO_NOME_DADOS_CLIENTE_VALIDO);
+        doNothing().when(chavePixServiceRepository).alteraDadosCliente(ALTERACAO_NOME_DADOS_CLIENTE_ALTERADO, true);
 
         var result = contaService.alteraDadosConta(id, ALTERACAO_NOME_DADOS_CLIENTE_ALTERADO);
         assertNotNull(result);
@@ -68,8 +68,7 @@ class ContaServiceTest {
                 null, 4321, 87654321, "poupanca");
 
         when(chavePixServiceRepository.findClienteById(id)).thenReturn(Optional.of(clienteExistente));
-        when(chavePixServiceRepository.alteraDadosCliente(clienteAlterado, false))
-                .thenReturn(clienteAlterado);
+        doNothing().when(chavePixServiceRepository).alteraDadosCliente(clienteAlterado, false);
 
         var result = contaService.alteraDadosConta(id, clienteAlterado);
 
