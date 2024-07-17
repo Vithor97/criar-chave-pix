@@ -79,18 +79,6 @@ public class ClienteConverter {
         );
     }
 
-    public static ContaEntity toContaEntity(Cliente cliente) {
-        return new ContaEntity(
-                cliente.getId(),
-                cliente.getTipoConta(),
-                cliente.getAgencia(),
-                cliente.getConta(),
-                cliente.getNome(),
-                cliente.getSobrenome(),
-                cliente.getTipoPessoa()
-        );
-    }
-
     public static ChavesEntity toPixKeyEntity(ChavesPix pixKey) {
         return new ChavesEntity(
                 pixKey.getUuidChave(),

@@ -44,8 +44,9 @@ public class ContaService implements ContaServicePort {
 
         clientEncontrado.setConta(clienteAlteracao.getConta());
         clientEncontrado.setAgencia(clienteAlteracao.getAgencia());
+        clientEncontrado.setTipoConta(clienteAlteracao.getTipoConta());
         clientEncontrado.setNome(clienteAlteracao.getNome());
-        clientEncontrado.setSobrenome(clienteAlteracao.getSobrenome());
+        clientEncontrado.setSobrenome(clienteAlteracao.getSobrenome() != null ? clienteAlteracao.getSobrenome() : clientEncontrado.getSobrenome());
 
         return clientEncontrado;
     }

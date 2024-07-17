@@ -35,10 +35,6 @@ public class ChavesEntity {
     private boolean ativo = true;
 
 
-    public ChavesEntity() {
-        this.dataRegistro = LocalDateTime.now();
-    }
-
     public ChavesEntity(UUID id,
                         ContaEntity conta,
                         String tipoChave,
@@ -59,9 +55,6 @@ public class ChavesEntity {
         return id;
     }
 
-    public void setId(UUID id) {
-        this.id = id;
-    }
 
     public ContaEntity getConta() {
         return conta;
@@ -75,24 +68,13 @@ public class ChavesEntity {
         return tipoChave;
     }
 
-    public void setTipoChave(String tipoChave) {
-        this.tipoChave = tipoChave;
-    }
-
     public String getValorChave() {
         return valorChave;
     }
 
-    public void setValorChave(String valorChave) {
-        this.valorChave = valorChave;
-    }
 
     public LocalDateTime getDataRegistro() {
         return dataRegistro;
-    }
-
-    public void setDataRegistro(LocalDateTime dataRegistro) {
-        this.dataRegistro = dataRegistro;
     }
 
     public LocalDateTime getDataInativacao() {

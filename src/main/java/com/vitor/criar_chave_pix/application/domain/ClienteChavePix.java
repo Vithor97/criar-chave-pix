@@ -54,25 +54,16 @@ public class ClienteChavePix {
         return tipoConta;
     }
 
-    public void setTipoConta(String tipoConta) {
-        this.tipoConta = tipoConta;
-    }
 
     public Integer getAgencia() {
         return agencia;
     }
 
-    public void setAgencia(Integer agencia) {
-        this.agencia = agencia;
-    }
 
     public Integer getConta() {
         return conta;
     }
 
-    public void setConta(Integer conta) {
-        this.conta = conta;
-    }
 
     public String getTipoPessoa() {
         return tipoPessoa;
@@ -86,25 +77,15 @@ public class ClienteChavePix {
         return nomeCorrentista;
     }
 
-    public void setNomeCorrentista(String nomeCorrentista) {
-        this.nomeCorrentista = nomeCorrentista;
-    }
 
     public String getSobrenomeCorrentista() {
         return sobrenomeCorrentista;
-    }
-
-    public void setSobrenomeCorrentista(String sobrenomeCorrentista) {
-        this.sobrenomeCorrentista = sobrenomeCorrentista;
     }
 
     public ChavesPix getChavesPix() {
         return chavesPix;
     }
 
-    public void setChavesPix(ChavesPix chavesPix) {
-        this.chavesPix = chavesPix;
-    }
 
     public List<ChavesPix> getChavesPixList() {
         return chavesPixList;

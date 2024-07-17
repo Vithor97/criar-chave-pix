@@ -82,6 +82,52 @@ class ContaServiceTest {
     }
 
     @Test
+    public void alteraDadosCliente_sobrenomeNuloNaEntrada_mantemSobrenomeExistente() {
+        long id = 2L;
+
+        Cliente clienteExistente = new Cliente(id, "Giovana", "Santos",
+                null, 1234, 12345678, "corrente");
+
+        Cliente clienteAlterado = new Cliente(id, "Giovana", null,
+                null, 4321, 87654321, "poupanca");
+
+        when(chavePixServiceRepository.findClienteById(id)).thenReturn(Optional.of(clienteExistente));
+        doNothing().when(chavePixServiceRepository).alteraDadosCliente(clienteAlterado, false);
+
+        var result = contaService.alteraDadosConta(id, clienteAlterado);
+
+        assertNotNull(result);
+        assertEquals(clienteAlterado.getNome(), result.getNome());
+        assertEquals(clienteExistente.getSobrenome(), result.getSobrenome()); // Mantém o sobrenome existente
+        assertEquals(clienteAlterado.getTipoConta(), result.getTipoConta());
+        assertEquals(clienteAlterado.getAgencia(), result.getAgencia());
+        assertEquals(clienteAlterado.getConta(), result.getConta());
+    }
+
+    @Test
+    public void alteraDadosCliente_ContaDiferente_mantemSobrenomeExistente() {
+        long id = 2L;
+
+        Cliente clienteExistente = new Cliente(id, "Giovana", "Santos",
+                null, 1234, 12345678, "corrente");
+
+        Cliente clienteAlterado = new Cliente(id, "Giovana", "Santos",
+                null, 1234, 12345698, "corrente");
+
+        when(chavePixServiceRepository.findClienteById(id)).thenReturn(Optional.of(clienteExistente));
+        doNothing().when(chavePixServiceRepository).alteraDadosCliente(clienteAlterado, false);
+
+        var result = contaService.alteraDadosConta(id, clienteAlterado);
+
+        assertNotNull(result);
+        assertEquals(clienteAlterado.getNome(), result.getNome());
+        assertEquals(clienteExistente.getSobrenome(), result.getSobrenome()); // Mantém o sobrenome existente
+        assertEquals(clienteAlterado.getTipoConta(), result.getTipoConta());
+        assertEquals(clienteAlterado.getAgencia(), result.getAgencia());
+        assertEquals(clienteAlterado.getConta(), result.getConta());
+    }
+
+    @Test
     public void alteraDadosCliente_id_Inexistente_lancaExecao(){
         long id = 1L;
         when(chavePixServiceRepository.findClienteById(id)).thenReturn(Optional.empty());
@@ -103,6 +149,50 @@ class ContaServiceTest {
         return Stream.of(
                 Arguments.of(ALTERACAO_NOME_DADOS_CLIENTE_VALIDO)
         );
+    }
+
+
+    private static Stream<Arguments> fornecerClientesParaTeste() {
+        long id = 2L;
+
+        Cliente clienteExistente1 = new Cliente(id, "Giovana", "Santos", null, 1234, 12345678, "corrente");
+        Cliente clienteAlterado1 = new Cliente(id, "Giovanna", "Santos", null, 1234, 12345678, "corrente");
+
+        Cliente clienteExistente2 = new Cliente(id, "Giovana", "Santos", null, 1234, 12345678, "corrente");
+        Cliente clienteAlterado2 = new Cliente(id, "Giovana", "Santos", null, 1234, 12345678, "poupanca");
+
+        Cliente clienteExistente3 = new Cliente(id, "Giovana", "Santos", null, 1234, 12345678, "corrente");
+        Cliente clienteAlterado3 = new Cliente(id, "Giovana", "Santos", null, 4321, 12345678, "corrente");
+
+        Cliente clienteExistente4 = new Cliente(id, "Giovana", "Santos", null, 1234, 12345678, "corrente");
+        Cliente clienteAlterado4 = new Cliente(id, "Giovana", "Santos", null, 1234, 87654321,"corrente" );
+
+        return Stream.of(
+                Arguments.of(clienteExistente1, clienteAlterado1, true),
+                Arguments.of(clienteExistente2, clienteAlterado2, true),
+                Arguments.of(clienteExistente3, clienteAlterado3, false),
+                Arguments.of(clienteExistente4, clienteAlterado4, false)
+        );
+
+
+    }
+
+    @ParameterizedTest
+    @MethodSource("fornecerClientesParaTeste")
+    public void alteraDadosCliente_validaAlteracao(Cliente clienteExistente, Cliente clienteAlterado, boolean agenciaContaIgual) {
+        long id = clienteExistente.getId();
+
+        when(chavePixServiceRepository.findClienteById(id)).thenReturn(Optional.of(clienteExistente));
+        doNothing().when(chavePixServiceRepository).alteraDadosCliente(clienteAlterado, agenciaContaIgual);
+
+        var result = contaService.alteraDadosConta(id, clienteAlterado);
+
+        assertNotNull(result);
+        assertEquals(clienteAlterado.getNome(), result.getNome());
+        assertEquals(clienteExistente.getSobrenome(), result.getSobrenome());
+        assertEquals(clienteAlterado.getTipoConta(), result.getTipoConta());
+        assertEquals(clienteAlterado.getAgencia(), result.getAgencia());
+        assertEquals(clienteAlterado.getConta(), result.getConta());
     }
 
 }

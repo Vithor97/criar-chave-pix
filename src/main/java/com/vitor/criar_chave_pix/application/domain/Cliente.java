@@ -17,8 +17,6 @@ public class Cliente {
     private String tipoConta;
 
 
-    public Cliente (){}
-
     public Cliente(String nome, String sobrenome, String tipoPessoa, Integer agencia, Integer conta, String tipoConta) {
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -66,9 +64,6 @@ public class Cliente {
         return tipoPessoa;
     }
 
-    public void setTipoPessoa(String tipoPessoa) {
-        this.tipoPessoa = tipoPessoa;
-    }
 
     public Integer getAgencia() {
         return agencia;

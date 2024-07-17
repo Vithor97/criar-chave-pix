@@ -14,9 +14,6 @@ public class ChavesPix {
 
     private boolean chaveAtivo;
 
-    public ChavesPix() {
-    }
-
     public ChavesPix(UUID uuidChave,
                      String tipoChave,
                      String valorChave,
@@ -43,51 +40,26 @@ public class ChavesPix {
         return tipoChave;
     }
 
-    public void setTipoChave(String tipoChave) {
-        this.tipoChave = tipoChave;
-    }
 
     public String getValorChave() {
         return valorChave;
     }
 
-    public void setValorChave(String valorChave) {
-        this.valorChave = valorChave;
-    }
 
     public LocalDateTime getDataCriacao() {
         return dataCriacao;
     }
 
-    public void setDataCriacao(LocalDateTime dataCriacao) {
-        this.dataCriacao = dataCriacao;
-    }
 
     public LocalDateTime getDataInativacao() {
         return dataInativacao;
     }
 
-    public void setDataInativacao(LocalDateTime dataInativacao) {
-        this.dataInativacao = dataInativacao;
-    }
 
     public boolean isChaveAtivo() {
         return chaveAtivo;
     }
 
-    public void setChaveAtivo(boolean chaveAtivo) {
-        this.chaveAtivo = chaveAtivo;
-    }
-
-    @Override
-    public String toString() {
-        return "ChavesPix{" +
-                "uuidChave=" + uuidChave +
-                ", tipoChave='" + tipoChave + '\'' +
-                ", valorChave='" + valorChave + '\'' +
-                ", dataCriacao=" + dataCriacao +
-                '}';
-    }
 
     public static ChavesPixBuilder builder() {
         return new ChavesPixBuilder();

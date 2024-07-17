@@ -74,55 +74,35 @@ public class ContaEntity {
         return tipoConta;
     }
 
-    public void setTipoConta(String tipoConta) {
-        this.tipoConta = tipoConta;
-    }
 
     public Integer getAgencia() {
         return agencia;
     }
 
-    public void setAgencia(Integer agencia) {
-        this.agencia = agencia;
-    }
 
     public Integer getConta() {
         return conta;
     }
 
-    public void setConta(Integer conta) {
-        this.conta = conta;
-    }
 
     public String getNomeCorrentista() {
         return nomeCorrentista;
     }
 
-    public void setNomeCorrentista(String nomeCorrentista) {
-        this.nomeCorrentista = nomeCorrentista;
-    }
 
     public String getSobrenomeCorrentista() {
         return sobrenomeCorrentista;
     }
 
-    public void setSobrenomeCorrentista(String sobrenomeCorrentista) {
-        this.sobrenomeCorrentista = sobrenomeCorrentista;
-    }
+
 
     public String getTipoPessoa() {
         return tipoPessoa;
     }
 
-    public void setTipoPessoa(String tipoPessoa) {
-        this.tipoPessoa = tipoPessoa;
-    }
 
     public List<ChavesEntity> getChavesPixList() {
         return chavesPixList;
     }
 
-    public void setChavesPixList(List<ChavesEntity> chavesPixList) {
-        this.chavesPixList = chavesPixList;
-    }
 }
