@@ -42,7 +42,12 @@ public class ContaService implements ContaServicePort {
 
         chavePixServiceRepository.alteraDadosCliente(clienteAlteracao,agenciaContaIgual);
 
-        return chavePixServiceRepository.findClienteById(id).orElseThrow(() -> new NaoEncontradoException("Cliente não encontrado após atualização"));
+        clientEncontrado.setConta(clienteAlteracao.getConta());
+        clientEncontrado.setAgencia(clienteAlteracao.getAgencia());
+        clientEncontrado.setNome(clienteAlteracao.getNome());
+        clientEncontrado.setSobrenome(clienteAlteracao.getSobrenome());
+
+        return clientEncontrado;
     }
 
 }

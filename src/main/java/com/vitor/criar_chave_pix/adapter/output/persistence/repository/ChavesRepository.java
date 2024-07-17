@@ -14,7 +14,7 @@ import java.util.UUID;
 
 public interface ChavesRepository extends JpaRepository<ChavesEntity, UUID> {
     boolean existsByValorChave(String valorChave);
-    @Query(value = "SELECT new com.vitor.criar_chave_pix.persistence.repository.dto.ChavePixContaDTO" +
+    @Query(value = "SELECT new com.vitor.criar_chave_pix.adapter.output.persistence.repository.dto.ChavePixContaDTO" +
             "(c.id, c.tipoChave, c.valorChave, " +
             "ac.tipoConta, ac.agencia, ac.conta, ac.nomeCorrentista, ac.sobrenomeCorrentista, " +
             "c.dataRegistro, c.dataInativacao) " +
@@ -23,7 +23,7 @@ public interface ChavesRepository extends JpaRepository<ChavesEntity, UUID> {
             "WHERE c.id = :id")
     Optional<ChavePixContaDTO> findByIdWithConta(@Param("id") UUID id);
 
-    @Query("SELECT new com.vitor.criar_chave_pix.persistence.repository.dto.ChavePixContaDTO(" +
+    @Query("SELECT new com.vitor.criar_chave_pix.adapter.output.persistence.repository.dto.ChavePixContaDTO(" +
             "c.id, c.tipoChave, c.valorChave, " +
             "ac.tipoConta, ac.agencia, ac.conta, " +
             "ac.nomeCorrentista, ac.sobrenomeCorrentista, " +
