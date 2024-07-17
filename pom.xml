@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>com.vitor</groupId>
 	<artifactId>criar_chave_pix</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>criar_chave_pix</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Case gerenciamento de chaves pix</description>
 	<url/>
 	<licenses>
 		<license/>
@@ -105,6 +105,8 @@
 						<exclude>com/vitor/criar_chave_pix/adapter/input/web/request/**</exclude>
 						<exclude>com/vitor/criar_chave_pix/adapter/input/web/response/**</exclude>
 						<exclude>com/vitor/criar_chave_pix/application/ports/**</exclude>
+						<exclude>com/vitor/criar_chave_pix/config/**</exclude>
+						<exclude>com/vitor/criar_chave_pix/adapter/input/web/swagger/**</exclude>
 					</excludes>
 					<rules>
 						<rule>
