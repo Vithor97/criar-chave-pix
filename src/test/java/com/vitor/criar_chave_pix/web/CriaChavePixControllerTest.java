@@ -174,6 +174,69 @@ class CriaChavePixControllerTest {
     }
 
     @Test
+    public void consultaChavePixPorId_ComTipoChave_ReturnsUnprocessableEntity() throws Exception {
+        UUID uuid = UUID.randomUUID();
+
+        mockMvc.perform(get("/api/consultar/{id}", uuid)
+                        .param("tipoChave", "EMAIL"))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void consultaChavePixPorId_ComAgencia_ReturnsUnprocessableEntity() throws Exception {
+        UUID uuid = UUID.randomUUID();
+
+        mockMvc.perform(get("/api/consultar/{id}", uuid)
+                        .param("agencia", "1234"))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void consultaChavePixPorId_ComConta_ReturnsUnprocessableEntity() throws Exception {
+        UUID uuid = UUID.randomUUID();
+
+        mockMvc.perform(get("/api/consultar/{id}", uuid)
+                        .param("conta", "567890"))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void consultaChavePixPorId_ComNomeCorrentista_ReturnsUnprocessableEntity() throws Exception {
+        UUID uuid = UUID.randomUUID();
+
+        mockMvc.perform(get("/api/consultar/{id}", uuid)
+                        .param("nomeCorrentista", "João"))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void consultaChavePixPorId_ComSobrenomeCorrentista_ReturnsUnprocessableEntity() throws Exception {
+        UUID uuid = UUID.randomUUID();
+
+        mockMvc.perform(get("/api/consultar/{id}", uuid)
+                        .param("sobrenomeCorrentista", "Silva"))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void consultaChavePixPorId_ComDataInclusao_ReturnsUnprocessableEntity() throws Exception {
+        UUID uuid = UUID.randomUUID();
+
+        mockMvc.perform(get("/api/consultar/{id}", uuid)
+                        .param("dataInclusao", "01/01/2020"))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
+    public void consultaChavePixPorId_ComDataInativacao_ReturnsUnprocessableEntity() throws Exception {
+        UUID uuid = UUID.randomUUID();
+
+        mockMvc.perform(get("/api/consultar/{id}", uuid)
+                        .param("dataInativacao", "01/01/2021"))
+                .andExpect(status().isUnprocessableEntity());
+    }
+
+    @Test
     public void listaChavePixPorId_NoResults_ReturnsNotFound() throws Exception {
         when(chaveServicePort.buscarChavesPixComFiltros(any(), any(), any(), any(), any(), any(), any()))
                 .thenReturn(Collections.emptyList());

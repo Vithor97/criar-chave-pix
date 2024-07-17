@@ -1,6 +1,7 @@
 package com.vitor.criar_chave_pix.adapter.input.web;
 
 
+import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.adapter.input.web.request.AlteraClienteRequest;
 import com.vitor.criar_chave_pix.adapter.input.web.response.AlteraClienteResponse;
 import com.vitor.criar_chave_pix.adapter.input.web.response.ChavePixDesativadaResponse;
@@ -47,12 +48,26 @@ public class CriaChavePixController {
     }
 
     @GetMapping("/consultar/{id}")
-    public ResponseEntity<ConsultaChavePixResponse> consultaChavePixPorId(@PathVariable UUID id) {
+    public ResponseEntity<ConsultaChavePixResponse> consultaChavePixPorId(@PathVariable UUID id,
+                                                                          @RequestParam(required = false) String tipoChave,
+                                                                          @RequestParam(required = false) Integer agencia,
+                                      @RequestParam(required = false) Integer conta,
+                                      @RequestParam(required = false) String nomeCorrentista,
+                                      @RequestParam(required = false) String sobrenomeCorrentista,
+                                      @RequestParam(required = false) String dataInclusao,
+                                      @RequestParam(required = false) String dataInativacao
+    ) {
+
+        if (tipoChave != null || agencia != null || conta != null || nomeCorrentista != null || sobrenomeCorrentista != null || dataInclusao != null || dataInativacao != null) {
+            throw new ValidationException("Parâmetros de busca não podem ser informados quando possui uma chave PIX informada.");
+        }
+
         Optional<ClienteChavePix> chavePix = chaveServicePort.consultaChave(id);
 
         return chavePix.map(chave -> ResponseEntity.ok(ConsultaChavePixResponse.fromDomain(chave)))
                 .orElseGet(() -> ResponseEntity.status(404).build());
     }
+
 
     @GetMapping("/consultar")
     public ResponseEntity<List<ConsultaChavePixResponse>> listaChavePixPorId(@RequestParam(required = false) String tipoChave,

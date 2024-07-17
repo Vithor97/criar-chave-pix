@@ -98,18 +98,20 @@
 						<exclude>com/vitor/criar_chave_pix/adapter/input/web/request/**</exclude>
 						<exclude>com/vitor/criar_chave_pix/adapter/input/web/response/**</exclude>
 						<exclude>com/vitor/criar_chave_pix/application/ports/**</exclude>
-						<exclude>com/vitor/criar_chave_pix/application/validators/old/**</exclude>
-<!--						<exclude>com/vitor/criar_chave_pix/adapter/output/persistence/**</exclude>-->
-
 					</excludes>
 					<rules>
 						<rule>
 							<element>BUNDLE</element>
 							<limits>
 								<limit>
-									<counter>LINE</counter>
+									<counter>INSTRUCTION</counter>
 									<value>COVEREDRATIO</value>
-									<minimum>90%</minimum>
+									<minimum>0.90</minimum>
+								</limit>
+								<limit>
+									<counter>BRANCH</counter>
+									<value>COVEREDRATIO</value>
+									<minimum>0.90</minimum>
 								</limit>
 							</limits>
 						</rule>
