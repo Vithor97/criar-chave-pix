@@ -3,14 +3,15 @@ package com.vitor.criar_chave_pix.adapter.input.web;
 
 import com.vitor.criar_chave_pix.adapter.exceptions.ValidationException;
 import com.vitor.criar_chave_pix.adapter.input.web.request.AlteraClienteRequest;
+import com.vitor.criar_chave_pix.adapter.input.web.request.CriaChaveRequest;
 import com.vitor.criar_chave_pix.adapter.input.web.response.AlteraClienteResponse;
 import com.vitor.criar_chave_pix.adapter.input.web.response.ChavePixDesativadaResponse;
 import com.vitor.criar_chave_pix.adapter.input.web.response.ConsultaChavePixResponse;
 import com.vitor.criar_chave_pix.adapter.input.web.response.CriaChaveResponse;
+import com.vitor.criar_chave_pix.adapter.input.web.swagger.ICriaChave;
 import com.vitor.criar_chave_pix.application.domain.ClienteChavePix;
 import com.vitor.criar_chave_pix.application.ports.ChaveServicePort;
 import com.vitor.criar_chave_pix.application.ports.ContaServicePort;
-import com.vitor.criar_chave_pix.adapter.input.web.request.CriaChaveRequest;
 import jakarta.validation.Valid;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api")
-public class CriaChavePixController {
+public class CriaChavePixController implements ICriaChave {
 
     private final ChaveServicePort chaveServicePort;
     private final ContaServicePort contaServicePort;
@@ -35,19 +36,19 @@ public class CriaChavePixController {
         this.contaServicePort = contaServicePort;
     }
 
-    @PostMapping("/inserir")
+    @Override
     public ResponseEntity<CriaChaveResponse> criaChavePix(@RequestBody @Valid CriaChaveRequest chaveRequest) {
         var chavePixClienteCreated = chaveServicePort.criaChavePix(chaveRequest.toDomain());
         return ResponseEntity.status(HttpStatus.CREATED).body(new CriaChaveResponse(chavePixClienteCreated));
     }
 
-    @PutMapping("/alterarDados/{id}")
+    @Override
     public ResponseEntity<AlteraClienteResponse> alteraDadosConta(@PathVariable Long id, @RequestBody @Valid AlteraClienteRequest alteraClienteRequest) {
         var clienteAlterado = contaServicePort.alteraDadosConta(id, alteraClienteRequest.toDomain());
         return ResponseEntity.status(HttpStatus.OK).body(AlteraClienteResponse.fromDomain(clienteAlterado));
     }
 
-    @GetMapping("/consultar/{id}")
+    @Override
     public ResponseEntity<ConsultaChavePixResponse> consultaChavePixPorId(@PathVariable UUID id,
                                                                           @RequestParam(required = false) String tipoChave,
                                                                           @RequestParam(required = false) Integer agencia,
@@ -69,7 +70,7 @@ public class CriaChavePixController {
     }
 
 
-    @GetMapping("/consultar")
+    @Override
     public ResponseEntity<List<ConsultaChavePixResponse>> listaChavePixPorId(@RequestParam(required = false) String tipoChave,
                                                                              @RequestParam(required = false) Integer agencia,
                                                                              @RequestParam(required = false) Integer conta,
@@ -91,11 +92,10 @@ public class CriaChavePixController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/desativar/{id}")
+    @Override
     public ResponseEntity<ChavePixDesativadaResponse> desativaChavePix(@PathVariable UUID id) {
         var chaveDesativada = chaveServicePort.desativaChave(id);
         return ResponseEntity.status(HttpStatus.OK).body(ChavePixDesativadaResponse.fromDomain(chaveDesativada));
     }
-
 
 }
