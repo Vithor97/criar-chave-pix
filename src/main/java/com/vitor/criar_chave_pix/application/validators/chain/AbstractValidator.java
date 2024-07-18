@@ -14,6 +14,6 @@ public abstract class AbstractValidator {
     protected void next(String tipoChave, String valorChave) {
         if(nonNull(next)){
             next.validate(tipoChave, valorChave);
-        };
+        }
     }
 }
