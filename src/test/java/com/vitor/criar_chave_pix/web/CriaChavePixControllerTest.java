@@ -65,7 +65,7 @@ class CriaChavePixControllerTest {
                                 .content(objectMapper.writeValueAsString(chaveRequest))
                                 .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$.idChave").value(chavePixId.toString()));
     }
 

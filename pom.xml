@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.vitor</groupId>
 	<artifactId>criar_chave_pix</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<name>criar_chave_pix</name>
 	<description>Case gerenciamento de chaves pix</description>
 	<url/>

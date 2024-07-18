@@ -39,7 +39,7 @@ public class CriaChavePixController implements ICriaChave {
     @Override
     public ResponseEntity<CriaChaveResponse> criaChavePix(@RequestBody @Valid CriaChaveRequest chaveRequest) {
         var chavePixClienteCreated = chaveServicePort.criaChavePix(chaveRequest.toDomain());
-        return ResponseEntity.status(HttpStatus.CREATED).body(new CriaChaveResponse(chavePixClienteCreated));
+        return ResponseEntity.status(HttpStatus.OK).body(new CriaChaveResponse(chavePixClienteCreated));
     }
 
     @Override
