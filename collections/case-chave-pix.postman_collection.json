@@ -1,0 +1,421 @@
+{
+	"info": {
+		"_postman_id": "09aedadc-ddd0-4ef9-b03f-3ce13bd2e658",
+		"name": "case-chave-pix",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33347324"
+	},
+	"item": [
+		{
+			"name": "01-criar chave pix",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// const totalRequests = 15;\r",
+							"// const baseEmail = 'vitor@bradesco.com';\r",
+							"// const tipoChave = 'email';\r",
+							"// const tipoConta = 'corrente';\r",
+							"// const agencia = 1234;\r",
+							"// const conta = 12345678;\r",
+							"// const nomeCorrentista = 'Vitor';\r",
+							"// const sobrenomeCorrentista = 'Santos de Miranda';\r",
+							"\r",
+							"// for (let i = 1; i <= totalRequests; i++) {\r",
+							"//     let email = `carlos${i}@antony.com`;\r",
+							"\r",
+							"//     pm.sendRequest({\r",
+							"//         url: 'http://localhost:8080/api/inserir',\r",
+							"//         method: 'POST',\r",
+							"//         header: {\r",
+							"//             'Content-Type': 'application/json'\r",
+							"//         },\r",
+							"//         body: {\r",
+							"//             mode: 'raw',\r",
+							"//             raw: JSON.stringify({\r",
+							"//                 tipoChave: tipoChave,\r",
+							"//                 valorChave: email,\r",
+							"//                 tipoConta: tipoConta,\r",
+							"//                 agencia: agencia,\r",
+							"//                 conta: conta,\r",
+							"//                 nomeCorrentista: nomeCorrentista,\r",
+							"//                 sobrenomeCorrentista: sobrenomeCorrentista\r",
+							"//             })\r",
+							"//         }\r",
+							"//     }, function (err, res) {\r",
+							"//         if (err) {\r",
+							"//             console.log(`Erro na requisição ${i}:`, err);\r",
+							"//         } else {\r",
+							"//             console.log(`Requisição ${i} enviada com sucesso:`, res);\r",
+							"//         }\r",
+							"//     });\r",
+							"// }"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tipoChave\": \"celular\",\r\n    \"valorChave\": \"+5511999999991\",\r\n    \"tipoConta\": \"poupanca\",\r\n    \"agencia\": 1234,\r\n    \"conta\": 12345679,\r\n    \"nomeCorrentista\": \"Vitor\",\r\n    \"sobrenomeCorrentista\": \"Santos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/inserir",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"inserir"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "01.1-cliente PJ 20 chaves cadastradas",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoChave\": \"cnpj\",\r\n    \"valorChave\": \"60.701.190/0001-04\",\r\n    \"tipoConta\": \"corrente\",\r\n    \"agencia\": 1234,\r\n    \"conta\": 12345678,\r\n    \"nomeCorrentista\": \"Carlos\",\r\n    \"sobrenomeCorrentista\": \"Antonio\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/inserir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"inserir"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				},
+				{
+					"name": "01.2-cliente PF 5 Chaves cadastradas",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoChave\": \"celular\",\r\n    \"valorChave\": \"+5511999999991\",\r\n    \"tipoConta\": \"poupanca\",\r\n    \"agencia\": 1234,\r\n    \"conta\": 12345679,\r\n    \"nomeCorrentista\": \"Vitor\",\r\n    \"sobrenomeCorrentista\": \"Santos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/inserir",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"inserir"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "02-altera-dados-cliente",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"// const totalRequests = 15;\r",
+							"// const baseEmail = 'vitor@bradesco.com';\r",
+							"// const tipoChave = 'email';\r",
+							"// const tipoConta = 'corrente';\r",
+							"// const agencia = 1234;\r",
+							"// const conta = 12345678;\r",
+							"// const nomeCorrentista = 'Vitor';\r",
+							"// const sobrenomeCorrentista = 'Santos de Miranda';\r",
+							"\r",
+							"// for (let i = 1; i <= totalRequests; i++) {\r",
+							"//     let email = `vitor${i}@bradesco.com`;\r",
+							"\r",
+							"//     pm.sendRequest({\r",
+							"//         url: 'http://localhost:8080/api/inserir',\r",
+							"//         method: 'POST',\r",
+							"//         header: {\r",
+							"//             'Content-Type': 'application/json'\r",
+							"//         },\r",
+							"//         body: {\r",
+							"//             mode: 'raw',\r",
+							"//             raw: JSON.stringify({\r",
+							"//                 tipoChave: tipoChave,\r",
+							"//                 valorChave: email,\r",
+							"//                 tipoConta: tipoConta,\r",
+							"//                 agencia: agencia,\r",
+							"//                 conta: conta,\r",
+							"//                 nomeCorrentista: nomeCorrentista,\r",
+							"//                 sobrenomeCorrentista: sobrenomeCorrentista\r",
+							"//             })\r",
+							"//         }\r",
+							"//     }, function (err, res) {\r",
+							"//         if (err) {\r",
+							"//             console.log(`Erro na requisição ${i}:`, err);\r",
+							"//         } else {\r",
+							"//             console.log(`Requisição ${i} enviada com sucesso:`, res);\r",
+							"//         }\r",
+							"//     });\r",
+							"// }"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nome\": \"Vitor\",\r\n    \"sobrenome\": \"Santos de Miranda\",\r\n    \"tipoConta\": \"poupanca\",\r\n    \"agencia\": 1234,\r\n    \"conta\": 12345679\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/alterarDados/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"alterarDados",
+						"1"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "02-altera-dados-cliente",
+					"originalRequest": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Carlos\",\r\n    \"sobrenome\": \"Santos de Miranda\",\r\n    \"tipoConta\": \"poupanca\",\r\n    \"agencia\": 1234,\r\n    \"conta\": 12345678\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/alterarDados/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"alterarDados",
+								"1"
+							]
+						}
+					},
+					"_postman_previewlanguage": null,
+					"header": null,
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "03-consulta-chave-id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/consultar/507b5c93-23af-410a-ab77-baaa78977d24?tipoChave=cpf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultar",
+						"507b5c93-23af-410a-ab77-baaa78977d24"
+					],
+					"query": [
+						{
+							"key": "tipoChave",
+							"value": "cpf"
+						},
+						{
+							"key": "agencia",
+							"value": "1234",
+							"disabled": true
+						},
+						{
+							"key": "conta",
+							"value": "12345678",
+							"disabled": true
+						},
+						{
+							"key": "nomeCorrentista",
+							"value": "Vitor",
+							"disabled": true
+						},
+						{
+							"key": "dataInclusao",
+							"value": "14/07/2024",
+							"disabled": true
+						},
+						{
+							"key": "dataInativacao",
+							"value": "14/07/2024",
+							"disabled": true
+						},
+						{
+							"key": "sobrenomeCorrentista",
+							"value": "Santos",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "04-consulta-chave-lista",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/consultar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"consultar"
+					],
+					"query": [
+						{
+							"key": "tipoChave",
+							"value": "cpf",
+							"disabled": true
+						},
+						{
+							"key": "agencia",
+							"value": "1234",
+							"disabled": true
+						},
+						{
+							"key": "conta",
+							"value": "12345678",
+							"disabled": true
+						},
+						{
+							"key": "nomeCorrentista",
+							"value": "Vitor",
+							"disabled": true
+						},
+						{
+							"key": "dataInclusao",
+							"value": "14/07/2024",
+							"disabled": true
+						},
+						{
+							"key": "dataInativacao",
+							"value": "14/07/2024",
+							"disabled": true
+						},
+						{
+							"key": "sobrenomeCorrentista",
+							"value": "Santos",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "05-desativar-chave",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/desativar/b26f3272-bc8e-49de-bec0-2967ad52ec1d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"desativar",
+						"b26f3272-bc8e-49de-bec0-2967ad52ec1d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "swagger",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/swagger-ui/index.html",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"swagger-ui",
+						"index.html"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
