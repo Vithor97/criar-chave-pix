@@ -39,8 +39,6 @@ public class ChavePixService implements ChaveServicePort {
         var tipooChave = clienteChavePix.getChavesPix().getTipoChave();
 
         chavePixValidatorChain.validate(tipooChave, chavePix);
-        //ChavePixValidator.validate(tipooChave, chavePix);
-
 
         //verificar se chave pix existe no repositorio, se ja existir lança exception
         if (chavePixServiceRepository.chavepixExistente(clienteChavePix.getChavesPix().getValorChave())) {
@@ -48,7 +46,6 @@ public class ChavePixService implements ChaveServicePort {
         }
 
         //busca informações da conta
-        //Optional<ClienteChavePix> cliente = chavePixServiceRepository.buscaAgenciaConta(agencia, conta);
         chavePixServiceRepository.buscaAgenciaConta(agencia, conta).ifPresentOrElse(cliente ->{
             clienteChavePix.setIdConta(cliente.getIdConta());
             clienteChavePix.setTipoPessoa(cliente.getTipoPessoa());
@@ -65,31 +62,6 @@ public class ChavePixService implements ChaveServicePort {
             clienteChavePix.setTipoPessoa(tipoPessoa);
         });
 
-
-        //se não existir salva o cliente e a chave pix
-//        if(cliente.isEmpty()){
-//            String tipoPessoa = verificaTipoPessoa(clienteChavePix);
-//            var clienteCriado = chavePixServiceRepository.insereCliente(
-//                    new Cliente(clienteChavePix.getNomeCorrentista(),
-//                            clienteChavePix.getSobrenomeCorrentista(),
-//                            tipoPessoa,
-//                            agencia,
-//                            conta,
-//                            clienteChavePix.getTipoConta()
-//                    ));
-//
-//            clienteChavePix.setIdConta(clienteCriado.getId());
-//            clienteChavePix.setTipoPessoa(tipoPessoa);
-//        }
-//        //caso contrario atualiza o id da conta, tipoPessoa a lista de chaves
-//        else {
-//            clienteChavePix.setIdConta(cliente.get().getIdConta());
-//            clienteChavePix.setTipoPessoa(cliente.get().getTipoPessoa());
-//            clienteChavePix.setChavesPixList(cliente.get().getChavesPixList());
-//
-//            validaCpfExistente(clienteChavePix);
-//        }
-
         //verifica quantidade de chaves pix de acordo com o tipo pessoa
         validaLimiteChaves(clienteChavePix, clienteChavePix.getChavesPixList().size());
 
@@ -97,8 +69,6 @@ public class ChavePixService implements ChaveServicePort {
         var newChavePix = new ChavesPix(null ,clienteChavePix.getChavesPix().getTipoChave(), clienteChavePix.getChavesPix().getValorChave(), null, null, true);
         var chavesPixCriada = chavePixServiceRepository.salvaChavePix(newChavePix, clienteChavePix.getIdConta());
 
-        //adicionar a lista de chaves ao dominio
-        //clienteChavePix.getChavesPixList().add(chavesPixCriada);
 
         return chavesPixCriada.getUuidChave();
     }

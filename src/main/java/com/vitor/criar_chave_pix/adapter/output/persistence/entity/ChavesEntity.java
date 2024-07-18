@@ -34,6 +34,8 @@ public class ChavesEntity {
     @Column(name = "ativo", nullable = false)
     private boolean ativo = true;
 
+    public ChavesEntity() {
+    }
 
     public ChavesEntity(UUID id,
                         ContaEntity conta,

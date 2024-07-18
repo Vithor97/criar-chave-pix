@@ -1,10 +1,19 @@
 package com.vitor.criar_chave_pix.application.validators.chain;
 
-public abstract class AbstractValidator implements Validator {
-    protected Validator nextValidator;
+import static java.util.Objects.nonNull;
 
-    @Override
-    public void setNext(Validator nextValidator) {
-        this.nextValidator = nextValidator;
+public abstract class AbstractValidator {
+
+    private final AbstractValidator next;
+
+    protected AbstractValidator(AbstractValidator next) {
+        this.next = next;
+    }
+
+    public abstract void validate(String tipoChave, String valorChave);
+    protected void next(String tipoChave, String valorChave) {
+        if(nonNull(next)){
+            next.validate(tipoChave, valorChave);
+        };
     }
 }
